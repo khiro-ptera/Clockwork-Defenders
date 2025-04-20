@@ -1,0 +1,147 @@
+[gd_scene load_steps=10 format=3 uid="uid://cbb5fdqnj62re"]
+
+[ext_resource type="Texture2D" uid="uid://ckiq12y2clq0h" path="res://Assets/sprites/protosword.png" id="1_5y3yd"]
+[ext_resource type="Script" uid="uid://dukcjwi0wely0" path="res://Scripts/proto_sword.gd" id="1_vh52n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k83do"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5y3yd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mbx5u"]
+radius = 5.0
+height = 42.0
+
+[sub_resource type="Animation" id="Animation_a24mu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hvpxh"]
+resource_name = "charge"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.5708, 1.5708, -1.5708, 1.5708, -1.5708, 1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.766667, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(32, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k3sdg"]
+resource_name = "light"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.785398, -0.785398, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1yxp8"]
+resource_name = "light2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(24, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0472, -1.0472, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l1um8"]
+_data = {
+&"RESET": SubResource("Animation_a24mu"),
+&"charge": SubResource("Animation_hvpxh"),
+&"light1": SubResource("Animation_k3sdg"),
+&"light2": SubResource("Animation_1yxp8")
+}
+
+[node name="ProtoSword" type="Node2D" groups=["sword", "weapon"]]
+script = ExtResource("1_vh52n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k83do")
+offset = Vector2(32, 0)
+
+[node name="Hitbox" type="Area2D" parent="AnimatedSprite2D" groups=["hitbox"]]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Hitbox"]
+position = Vector2(37, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mbx5u")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_l1um8")
+}
+
+[connection signal="area_entered" from="AnimatedSprite2D/Hitbox" to="." method="_on_hitbox_area_entered"]

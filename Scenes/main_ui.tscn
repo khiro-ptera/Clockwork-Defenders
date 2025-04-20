@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://xdje8dqio1dq"]
+
+[ext_resource type="Script" uid="uid://2mmcix547ux5" path="res://Scripts/main_ui.gd" id="1_dcbcb"]
+[ext_resource type="Texture2D" uid="uid://oj2yc0y1p5uf" path="res://Assets/sprites/UI/hpback.png" id="2_tbbry"]
+[ext_resource type="Texture2D" uid="uid://impconbbpfck" path="res://Assets/sprites/UI/hpover.png" id="3_7okpu"]
+[ext_resource type="Texture2D" uid="uid://d3xbqblnemga0" path="res://Assets/sprites/UI/hpfill.png" id="4_ylo01"]
+[ext_resource type="Texture2D" uid="uid://b2qs1uv7s8jhm" path="res://Assets/sprites/UI/currencyboard.png" id="5_tbbry"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7okpu"]
+font_color = Color(0.000693898, 0.000693898, 0.000693898, 1)
+
+[node name="MainUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dcbcb")
+
+[node name="Layer1" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="PlayerInfo" type="VBoxContainer" parent="Layer1"]
+layout_mode = 2
+offset_right = 144.0
+offset_bottom = 108.0
+
+[node name="Spacer1" type="MarginContainer" parent="Layer1/PlayerInfo"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="HPC" type="MarginContainer" parent="Layer1/PlayerInfo"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HP" type="TextureProgressBar" parent="Layer1/PlayerInfo/HPC"]
+layout_mode = 2
+step = 0.1
+texture_under = ExtResource("2_tbbry")
+texture_over = ExtResource("3_7okpu")
+texture_progress = ExtResource("4_ylo01")
+
+[node name="Spacer2" type="MarginContainer" parent="Layer1/PlayerInfo"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="CurrC" type="MarginContainer" parent="Layer1/PlayerInfo"]
+layout_mode = 2
+
+[node name="Currency" type="TextureRect" parent="Layer1/PlayerInfo/CurrC"]
+layout_mode = 2
+texture = ExtResource("5_tbbry")
+
+[node name="Medallions" type="Label" parent="Layer1/PlayerInfo/CurrC"]
+layout_mode = 2
+text = "Medallions: "
+label_settings = SubResource("LabelSettings_7okpu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Layer1"]
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 648.0

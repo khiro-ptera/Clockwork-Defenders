@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://bhu2tdu5i6px5"]
+
+[ext_resource type="Script" uid="uid://b3lyv5scusddn" path="res://Scripts/Enemies/jelly.gd" id="1_onqpf"]
+[ext_resource type="Texture2D" uid="uid://5567cy8wq0ty" path="res://Assets/sprites/enemies/jelly/1.png" id="1_plco2"]
+[ext_resource type="Texture2D" uid="uid://bv38ehc51o0lw" path="res://Assets/sprites/enemies/jelly/damage.png" id="2_fn1pt"]
+[ext_resource type="Texture2D" uid="uid://b0gkgb2uhf1k3" path="res://Assets/sprites/particles/fire.png" id="3_choo6"]
+[ext_resource type="Texture2D" uid="uid://btna746pcs0ue" path="res://Assets/sprites/enemies/enemyHP/back.png" id="4_pnfmr"]
+[ext_resource type="Texture2D" uid="uid://b8815gnamy1x0" path="res://Assets/sprites/enemies/enemyHP/over.png" id="5_choo6"]
+[ext_resource type="Texture2D" uid="uid://bwd7ehmipy1s3" path="res://Assets/sprites/enemies/enemyHP/fill.png" id="6_tuwbm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_onqpf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_plco2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve" id="Curve_choo6"]
+_data = [Vector2(0, 0.494382), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_choo6"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.32549)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fn1pt"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4hef"]
+size = Vector2(26, 26)
+
+[node name="Jelly" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_onqpf")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_onqpf")
+
+[node name="Fire" type="CPUParticles2D" parent="Sprite"]
+amount = 10
+texture = ExtResource("3_choo6")
+lifetime = 1.5
+explosiveness = 0.05
+randomness = 0.5
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(5, 5)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_choo6")
+color_ramp = SubResource("Gradient_choo6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fn1pt")
+
+[node name="Hurtbox" type="Area2D" parent="." groups=["hurtbox"]]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_f4hef")
+
+[node name="Pointing" type="Node2D" parent="."]
+
+[node name="Damage" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_fn1pt")
+
+[node name="HP" type="TextureProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0.784314)
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+max_value = 5.0
+step = 0.05
+value = 5.0
+texture_under = ExtResource("4_pnfmr")
+texture_over = ExtResource("5_choo6")
+texture_progress = ExtResource("6_tuwbm")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://sxe5fmh5yhdq"]
+
+[ext_resource type="Texture2D" uid="uid://b1hqhsaweqj2" path="res://Assets/sprites/player.png" id="1_ctbnw"]
+[ext_resource type="Script" uid="uid://bcryuho7epiyk" path="res://Scripts/player.gd" id="1_patq1"]
+[ext_resource type="Texture2D" uid="uid://fv8bmeabaj1k" path="res://Assets/sprites/charge/back.png" id="3_fkybt"]
+[ext_resource type="Texture2D" uid="uid://b0otdp4qwjlv6" path="res://Assets/sprites/charge/over.png" id="4_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://cvhgygcqm1h3n" path="res://Assets/sprites/charge/fill.png" id="5_3smsa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t14td"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ctbnw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lh8p"]
+size = Vector2(18, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
+size = Vector2(30, 62)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_patq1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_t14td")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0lh8p")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+max_value = 5.0
+step = 0.05
+value = 5.0
+texture_under = ExtResource("3_fkybt")
+texture_over = ExtResource("4_x3wgy")
+texture_progress = ExtResource("5_3smsa")
+
+[node name="PlayerHurtbox" type="Area2D" parent="." groups=["hurtbox"]]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+shape = SubResource("RectangleShape2D_fkybt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
