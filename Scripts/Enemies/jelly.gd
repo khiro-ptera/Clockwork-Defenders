@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var medallionSC = preload("res://Scenes/medallion.tscn")
+var materialSC = preload("res://Scenes/material_drop.tscn")
 
 @onready var dmgOverlay = $"Damage"
 @onready var sprite = $"Sprite"
@@ -124,7 +125,7 @@ func damageFlash() -> void:
 
 func die():
 	dead = true
-	for i in randi_range(0, 10):
+	for i in randi_range(1, 9):
 		var mtemp = medallionSC.instantiate()
 		mtemp.value = 1
 		mtemp.pos = global_position + Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
@@ -133,6 +134,12 @@ func die():
 	for i in randi_range(0, 1):
 		var mtemp = medallionSC.instantiate()
 		mtemp.value = 10
+		mtemp.pos = global_position + Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
+		get_parent().call_deferred("add_child", mtemp)
+		mtemp = null
+	for i in randi_range(0, 1):
+		var mtemp = materialSC.instantiate()
+		mtemp.item = "plasmium"
 		mtemp.pos = global_position + Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
 		get_parent().call_deferred("add_child", mtemp)
 		mtemp = null

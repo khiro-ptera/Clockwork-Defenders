@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://ctev1tkquweog"]
 
-[ext_resource type="Script" uid="uid://ba8v45lqyaa0m" path="res://Scenes/medallion.gd" id="1_huo0x"]
+[ext_resource type="Script" uid="uid://ba8v45lqyaa0m" path="res://Scripts/medallion.gd" id="1_huo0x"]
 [ext_resource type="Texture2D" uid="uid://dhc6ew4ntj6j" path="res://Assets/sprites/drops/currency/medallion1.png" id="1_s74fw"]
 [ext_resource type="Texture2D" uid="uid://dipwjyrd83its" path="res://Assets/sprites/drops/currency/medallion10.png" id="2_huo0x"]
 [ext_resource type="Texture2D" uid="uid://c8id7uje47laf" path="res://Assets/sprites/drops/currency/medallion100.png" id="3_d0e86"]

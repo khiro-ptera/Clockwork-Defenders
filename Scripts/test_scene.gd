@@ -7,6 +7,7 @@ var jellySC = preload("res://Scenes/Enemies/jelly.tscn")
 var uiSC = preload("res://Scenes/main_ui.tscn")
 
 var p
+var ui
 
 var jellyTimer = 10.0
 
@@ -25,6 +26,8 @@ func _ready() -> void:
 	for i in get_children():
 		if i.is_in_group("player"):
 			p = i
+		if i.is_in_group("UILayer"):
+			ui = i
 
 func _process(delta: float) -> void:
 	if jellyTimer <= 0.0:

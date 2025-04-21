@@ -16,6 +16,7 @@ var iframes = 0.5
 
 var health = 100
 var medallions = 0
+@export var inv: Inv
 
 var wep1 = preload("res://Scenes/proto_sword.tscn")
 var wep2 = preload("res://Scenes/proto_gun.tscn")
@@ -209,3 +210,7 @@ func boost(time):
 func collect(item, quantity):
 	if item == "medallion":
 		medallions += quantity
+	else:
+		var invitem = InvItem.new(item)
+		inv.items.append(invitem)
+		get_parent().ui.get_child(0).update(invitem)

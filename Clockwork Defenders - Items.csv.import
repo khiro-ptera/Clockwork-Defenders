@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bq7ta1ang5hjl"
+
+[deps]
+
+files=["res://Clockwork Defenders - Items.item.translation"]
+
+source_file="res://Clockwork Defenders - Items.csv"
+dest_files=["res://Clockwork Defenders - Items.item.translation"]
+
+[params]
+
+compress=true
+delimiter=0

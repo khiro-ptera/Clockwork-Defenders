@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://cn70v6y4mphc4"]
+
+[ext_resource type="Script" uid="uid://p3hg1j7q2f4o" path="res://Scripts/Inventory/inventory_item.gd" id="1_ex5ap"]
+[ext_resource type="Texture2D" uid="uid://c7l2oj8u1wf8f" path="res://Assets/sprites/drops/materials/beryllium.png" id="2_jcupt"]
+
+[resource]
+script = ExtResource("1_ex5ap")
+name = "beryllium"
+id = 1
+star = 0
+sell = 1
+texture = ExtResource("2_jcupt")
+metadata/_custom_type_script = "uid://p3hg1j7q2f4o"

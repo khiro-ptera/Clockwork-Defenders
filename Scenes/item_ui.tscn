@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5bmhbu4i0bwr"]
+
+[ext_resource type="Script" uid="uid://coaoqlaw1qqs4" path="res://Scripts/item_ui.gd" id="1_0ievn"]
+[ext_resource type="Texture2D" uid="uid://cvqdxl07sxeu3" path="res://Assets/sprites/UI/invItemBack.png" id="1_p3smd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0ievn"]
+font_size = 12
+
+[node name="ItemUI" type="MarginContainer"]
+custom_minimum_size = Vector2(144, 48)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -144.0
+offset_bottom = 48.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+script = ExtResource("1_0ievn")
+
+[node name="Back" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_p3smd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
+[node name="LMargin" type="MarginContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="MMargin" type="MarginContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "SAMPLE"
+label_settings = SubResource("LabelSettings_0ievn")

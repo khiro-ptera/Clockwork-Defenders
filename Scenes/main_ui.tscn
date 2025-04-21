@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://xdje8dqio1dq"]
+[gd_scene load_steps=8 format=3 uid="uid://xdje8dqio1dq"]
 
 [ext_resource type="Script" uid="uid://2mmcix547ux5" path="res://Scripts/main_ui.gd" id="1_dcbcb"]
 [ext_resource type="Texture2D" uid="uid://oj2yc0y1p5uf" path="res://Assets/sprites/UI/hpback.png" id="2_tbbry"]
@@ -8,6 +8,9 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_7okpu"]
 font_color = Color(0.000693898, 0.000693898, 0.000693898, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbbry"]
+bg_color = Color(0.6, 0.6, 0.6, 0.635294)
 
 [node name="MainUI" type="Control"]
 layout_mode = 3
@@ -19,6 +22,7 @@ grow_vertical = 2
 script = ExtResource("1_dcbcb")
 
 [node name="Layer1" type="Control" parent="."]
+z_index = 1
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
@@ -65,3 +69,27 @@ vertical_alignment = 1
 layout_mode = 2
 offset_right = 1152.0
 offset_bottom = 648.0
+
+[node name="Layer2" type="Control" parent="."]
+z_index = 2
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="PlayerTabs" type="HBoxContainer" parent="Layer2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Inventory" type="ScrollContainer" parent="Layer2/PlayerTabs"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tbbry")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Items" type="VBoxContainer" parent="Layer2/PlayerTabs/Inventory"]
+layout_mode = 2

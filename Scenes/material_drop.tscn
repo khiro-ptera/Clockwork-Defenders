@@ -1,0 +1,92 @@
+[gd_scene load_steps=12 format=3 uid="uid://c3m6vobwh6uy5"]
+
+[ext_resource type="Script" uid="uid://wtydp4s1f5k8" path="res://Scripts/material_drop.gd" id="1_iq5c1"]
+[ext_resource type="Texture2D" uid="uid://c7l2oj8u1wf8f" path="res://Assets/sprites/drops/materials/beryllium.png" id="2_5j56g"]
+[ext_resource type="Texture2D" uid="uid://2ed11kag70bq" path="res://Assets/sprites/drops/materials/celestinium.png" id="3_w7xj4"]
+[ext_resource type="Texture2D" uid="uid://1hpjuu07rj2j" path="res://Assets/sprites/drops/materials/coballium.png" id="4_jgt8u"]
+[ext_resource type="Texture2D" uid="uid://dy4l18oox485h" path="res://Assets/sprites/drops/materials/exxollium.png" id="5_dnjiw"]
+[ext_resource type="Texture2D" uid="uid://dtc6lvxvffyoi" path="res://Assets/sprites/drops/materials/plasmium.png" id="6_cwh6e"]
+[ext_resource type="Texture2D" uid="uid://cc7yt1apkcgnl" path="res://Assets/sprites/drops/materials/voidfragment.png" id="7_elnby"]
+[ext_resource type="Texture2D" uid="uid://bc0jiqodikos1" path="res://Assets/sprites/drops/materials/warrellium.png" id="8_r6pow"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwnpq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_88ej7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5j56g")
+}],
+"loop": true,
+"name": &"beryllium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_w7xj4")
+}],
+"loop": true,
+"name": &"celestinium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_jgt8u")
+}],
+"loop": true,
+"name": &"coballium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_dnjiw")
+}],
+"loop": true,
+"name": &"exxollium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_cwh6e")
+}],
+"loop": true,
+"name": &"plasmium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_elnby")
+}],
+"loop": true,
+"name": &"voidfragment",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_r6pow")
+}],
+"loop": true,
+"name": &"warrellium",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0plpw"]
+
+[node name="Move" type="CharacterBody2D" groups=["pickup"]]
+script = ExtResource("1_iq5c1")
+
+[node name="Material" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Material"]
+shape = SubResource("RectangleShape2D_nwnpq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Material"]
+sprite_frames = SubResource("SpriteFrames_88ej7")
+animation = &"warrellium"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0plpw")
+disabled = true
+
+[connection signal="area_entered" from="Material" to="." method="_on_material_area_entered"]
+[connection signal="body_entered" from="Material" to="." method="_on_material_body_entered"]

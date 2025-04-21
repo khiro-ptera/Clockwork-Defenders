@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://sxe5fmh5yhdq"]
+[gd_scene load_steps=11 format=3 uid="uid://sxe5fmh5yhdq"]
 
 [ext_resource type="Texture2D" uid="uid://b1hqhsaweqj2" path="res://Assets/sprites/player.png" id="1_ctbnw"]
 [ext_resource type="Script" uid="uid://bcryuho7epiyk" path="res://Scripts/player.gd" id="1_patq1"]
+[ext_resource type="Resource" uid="uid://dy335p8ntmyyb" path="res://Resources/Inventory/playerInv.tres" id="2_x3wgy"]
 [ext_resource type="Texture2D" uid="uid://fv8bmeabaj1k" path="res://Assets/sprites/charge/back.png" id="3_fkybt"]
 [ext_resource type="Texture2D" uid="uid://b0otdp4qwjlv6" path="res://Assets/sprites/charge/over.png" id="4_x3wgy"]
 [ext_resource type="Texture2D" uid="uid://cvhgygcqm1h3n" path="res://Assets/sprites/charge/fill.png" id="5_3smsa"]
@@ -28,6 +29,7 @@ radius = 107.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_patq1")
+inv = ExtResource("2_x3wgy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_t14td")
