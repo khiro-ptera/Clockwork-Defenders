@@ -33,6 +33,7 @@ player=""
 enemy=""
 bomb=""
 pickup=""
+pickupRange=""
 
 [input]
 

@@ -1,10 +1,50 @@
-[gd_scene load_steps=11 format=3 uid="uid://ctev1tkquweog"]
+[gd_scene load_steps=12 format=3 uid="uid://ctev1tkquweog"]
 
 [ext_resource type="Script" uid="uid://ba8v45lqyaa0m" path="res://Scenes/medallion.gd" id="1_huo0x"]
 [ext_resource type="Texture2D" uid="uid://dhc6ew4ntj6j" path="res://Assets/sprites/drops/currency/medallion1.png" id="1_s74fw"]
 [ext_resource type="Texture2D" uid="uid://dipwjyrd83its" path="res://Assets/sprites/drops/currency/medallion10.png" id="2_huo0x"]
 [ext_resource type="Texture2D" uid="uid://c8id7uje47laf" path="res://Assets/sprites/drops/currency/medallion100.png" id="3_d0e86"]
 [ext_resource type="Texture2D" uid="uid://b5m07w6tqw6k4" path="res://Assets/sprites/drops/currency/medallion1000.png" id="4_7fb5h"]
+
+[sub_resource type="Animation" id="Animation_7fb5h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Medallion/AnimatedSprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_d0e86"]
+resource_name = "spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Medallion/AnimatedSprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.56905, 0.0, -1.56905]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hleo7"]
+_data = {
+&"RESET": SubResource("Animation_7fb5h"),
+&"spin": SubResource("Animation_d0e86")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lrlsn"]
+radius = 12.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hleo7"]
 animations = [{
@@ -41,59 +81,29 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lrlsn"]
-radius = 12.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_huo0x"]
 
-[sub_resource type="Animation" id="Animation_d0e86"]
-resource_name = "spin"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:skew")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [1.56905, 0.0, -1.56905]
-}
-
-[sub_resource type="Animation" id="Animation_7fb5h"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:skew")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hleo7"]
-_data = {
-&"RESET": SubResource("Animation_7fb5h"),
-&"spin": SubResource("Animation_d0e86")
-}
-
-[node name="Medallion" type="Area2D"]
+[node name="Move" type="CharacterBody2D" groups=["pickup"]]
 script = ExtResource("1_huo0x")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_hleo7")
-animation = &"1"
+[node name="Medallion" type="Area2D" parent="." groups=["pickup"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["pickup"]]
-shape = SubResource("CircleShape2D_lrlsn")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Medallion"]
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_hleo7")
 }
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Medallion"]
+shape = SubResource("CircleShape2D_lrlsn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Medallion"]
+sprite_frames = SubResource("SpriteFrames_hleo7")
+animation = &"1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_huo0x")
+disabled = true
+
+[connection signal="area_entered" from="Medallion" to="." method="_on_medallion_area_entered"]
+[connection signal="body_entered" from="Medallion" to="." method="_on_medallion_body_entered"]

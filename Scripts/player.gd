@@ -134,8 +134,6 @@ func _physics_process(delta):
 		currIframes -= delta
 	else:
 		modulate.a = 1.0
-		
-		
 	
 	if endlag <= 0.0:
 		if !weapon.is_in_group("bomb"):

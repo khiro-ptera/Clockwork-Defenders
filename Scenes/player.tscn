@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://sxe5fmh5yhdq"]
+[gd_scene load_steps=10 format=3 uid="uid://sxe5fmh5yhdq"]
 
 [ext_resource type="Texture2D" uid="uid://b1hqhsaweqj2" path="res://Assets/sprites/player.png" id="1_ctbnw"]
 [ext_resource type="Script" uid="uid://bcryuho7epiyk" path="res://Scripts/player.gd" id="1_patq1"]
@@ -22,6 +22,9 @@ size = Vector2(18, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
 size = Vector2(30, 62)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fkybt"]
+radius = 107.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_patq1")
@@ -50,4 +53,11 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
 shape = SubResource("RectangleShape2D_fkybt")
 
+[node name="PickupRange" type="Area2D" parent="." groups=["pickupRange"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRange"]
+shape = SubResource("CircleShape2D_fkybt")
+
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="area_entered" from="PickupRange" to="." method="_on_pickup_range_area_entered"]
