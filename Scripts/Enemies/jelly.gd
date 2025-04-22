@@ -8,7 +8,11 @@ var materialSC = preload("res://Scenes/material_drop.tscn")
 @onready var dirNode = $"Pointing"
 @onready var hpbar = $"HP"
 
-@onready var fpart = $"Sprite/Fire"
+@onready var ftime = $"Fire"
+@onready var stime = $"Stun"
+
+@onready var statuspart = $"Sprite/StatusParticles"
+@onready var fpart = $"Sprite/StatusParticles/Fire"
 
 @onready var type = 1 # type of jelly
 @onready var tier = 1 # difficulty
@@ -19,6 +23,7 @@ var dmgS = 0
 var dmgMult = 1.0
 var health = 100
 var speed = 50.0
+var basespd = 50.0
 @onready var maxH = 100 * (tier - 1) * (tier - 1) + 100
 var defP = 100 # pierce def
 var defE = 30 # elemental def
@@ -35,7 +40,7 @@ var curseRes = 0
 # TODO: stagger/stagger resistance
 var staggerRes = 10
 
-var status = ""
+var status: Array[String] = []
 var statusTimer = 0.0
 
 var player
@@ -57,6 +62,7 @@ func _ready() -> void:
 			maxH = 100 * (tier - 1) * (tier - 1) + 100
 			staggerRes = 20 * (tier - 1) + 10
 			speed = 50.0
+			basespd = 50.0
 
 func _physics_process(delta: float) -> void:
 	
@@ -69,15 +75,15 @@ func _physics_process(delta: float) -> void:
 	hpbar.max_value = maxH
 	hpbar.value = health
 	
-	if statusTimer > 0.0:
-		match(status):
-			"fire":
-				take_damage(0, 0, delta * (5 + maxH/50.0), 0, 0.5 * tier)
-				fpart.visible = true
-		statusTimer -= delta
+	if status.size() > 0:
+		statuspart.visible = true
+		if status.has("fire"):
+			take_damage(0, 0, delta * (5 + maxH/50.0), 0, 0.5 * tier)
+			fpart.visible = true
+		else:
+			fpart.visible = false
 	else:
-		fpart.visible = false
-	
+		statuspart.visible = false
 
 func take_damage(n, p, e, s, kb) -> void: # TODO: make global??
 	damageFlash()
@@ -105,7 +111,7 @@ func stagger(time) -> void:
 func inflict(c, i):
 	match(c):
 		"fire":
-			statusTimer = i * 100 / (100 + fireRes)
+			ftime.start(i * 100 / (100 + fireRes))
 		"poison":
 			statusTimer = i * 100 / (100 + poisonRes)
 		"freeze":
@@ -116,7 +122,7 @@ func inflict(c, i):
 			statusTimer = i * 100 / (100 + shockRes)
 		"curse":
 			statusTimer = i * 100 / (100 + curseRes)
-	status = c
+	status.append(c)
 
 func damageFlash() -> void:
 	dmgOverlay.visible = true
@@ -148,3 +154,7 @@ func die():
 func _on_hurtbox_area_entered(area: Area2D) -> void: # TODO: make a hitbox and move this to the hitbox, for attack animations and stuff
 	if area.is_in_group("hurtbox") && area.get_parent().is_in_group("player"):
 		area.get_parent().take_damage(damage, dmgP, dmgE, dmgS)
+
+func _on_fire_timeout() -> void:
+	if status.has("fire"):
+		status.remove_at(status.find("fire"))

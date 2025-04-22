@@ -38,7 +38,9 @@ script = ExtResource("1_onqpf")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_onqpf")
 
-[node name="Fire" type="CPUParticles2D" parent="Sprite"]
+[node name="StatusParticles" type="Node2D" parent="Sprite"]
+
+[node name="Fire" type="CPUParticles2D" parent="Sprite/StatusParticles"]
 amount = 10
 texture = ExtResource("3_choo6")
 lifetime = 1.5
@@ -87,4 +89,9 @@ texture_under = ExtResource("4_pnfmr")
 texture_over = ExtResource("5_choo6")
 texture_progress = ExtResource("6_tuwbm")
 
+[node name="Stun" type="Timer" parent="."]
+
+[node name="Fire" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]
