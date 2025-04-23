@@ -44,6 +44,9 @@ func _ready() -> void:
 			sprite.play("rook")
 			shape = "circle"
 			stun = Vector2(0.5, 3.0)
+		11:
+			sprite.play("scatter")
+			shape = "circle"
 
 func _physics_process(delta: float) -> void:
 	velocity = Vector2(speed, 0.0).rotated(rotation)

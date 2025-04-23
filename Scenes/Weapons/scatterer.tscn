@@ -1,0 +1,135 @@
+[gd_scene load_steps=9 format=3 uid="uid://7saufv0mi64l"]
+
+[ext_resource type="Script" uid="uid://denn2e5tefoh1" path="res://Scripts/Weapons/Guns/scatterer.gd" id="1_4jmkn"]
+[ext_resource type="Texture2D" uid="uid://6q4vfdviigrj" path="res://Assets/sprites/weapons/guns/scatterer.png" id="2_jy26e"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_75uy3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jy26e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_4jmkn"]
+resource_name = "fire"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-4, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jy26e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_75uy3"]
+resource_name = "firereload"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-4, 0), Vector2(-32, 0), Vector2(-32, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0472, -0.261799, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_hymip"]
+resource_name = "charge"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-4, 0), Vector2(0, 0), Vector2(-16, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.523599, 0.523599, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_75uy3"]
+_data = {
+&"RESET": SubResource("Animation_jy26e"),
+&"charge": SubResource("Animation_hymip"),
+&"fire": SubResource("Animation_4jmkn"),
+&"firereload": SubResource("Animation_75uy3")
+}
+
+[node name="Scatterer" type="Node2D" groups=["gun", "weapon"]]
+script = ExtResource("1_4jmkn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_75uy3")
+offset = Vector2(32, 0)
+
+[node name="Muzzle" type="Node2D" parent="AnimatedSprite2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_75uy3")
+}

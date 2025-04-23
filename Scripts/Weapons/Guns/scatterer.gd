@@ -1,23 +1,23 @@
 extends Node2D
 
-@onready var id = 10
+@onready var id = 11
 @onready var star = 2
 
 @onready var ap = $"AnimationPlayer"
 @onready var sprite = $"AnimatedSprite2D"
 @onready var muzzle = $"AnimatedSprite2D/Muzzle"
 
-@onready var maxCombo = 1
-@onready var endlag = 1.5
+@onready var maxCombo = 2
+@onready var endlag = 0.8
 @onready var combolag = 1.8
-@onready var damage = 30
-@onready var damageP = 5
+@onready var damage = 2
+@onready var damageP = 2
 @onready var damageE = 0
 @onready var damageS = 0
-@onready var bulletSpeed = 180.0
-@onready var charge = 4.0
-@onready var chargelag = 1.5
-@onready var kb = 4.0
+@onready var bulletSpeed = 300.0
+@onready var charge = 3.5
+@onready var chargelag = 1.0
+@onready var kb = 0.0
 
 var bulletSC = preload("res://Scenes/bullet.tscn")
 
@@ -27,12 +27,21 @@ func _ready() -> void:
 func lightAttack(combo: int) -> void:
 	match combo:
 		1:
-			fire(damage, bulletSpeed, Vector2(1.5, 1.5), 1.0, kb, damageP, damageE, damageS, 1)
+			ap.play("fire")
+			for i in 8:
+				fire(damage, bulletSpeed, Vector2(1.0, 1.0), 1.0, kb, damageP, damageE, damageS, 0, randf_range(-0.1, 0.1))
+				await get_tree().create_timer(0.05).timeout
+		2:
 			ap.play("firereload")
+			for i in 8:
+				fire(damage, bulletSpeed, Vector2(1.0, 1.0), 1.0, kb, damageP, damageE, damageS, 0, randf_range(-0.1, 0.1))
+				await get_tree().create_timer(0.05).timeout
 
 func chargedAttack() -> void:
-	fire(damage * 2.4, bulletSpeed * 1.2, Vector2(2.8, 2.8), 1.2, 1.5 * kb, damageP, damageE, damageS, 20)
 	ap.play("charge")
+	for i in 30:
+		fire(damage * 1.5, bulletSpeed * 1.2, Vector2(1.2, 1.0), 1.1, kb, damageP, damageE, damageS, 0, deg_to_rad(-15 + i))
+		await get_tree().create_timer(0.02).timeout
 
 func fire(dmg, spd, scl, time, kb2, dp = 0, de = 0, ds = 0, pierce = 0, angle = 0.0) -> void:
 	var shot = bulletSC.instantiate()
