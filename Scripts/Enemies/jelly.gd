@@ -9,10 +9,12 @@ var materialSC = preload("res://Scenes/material_drop.tscn")
 @onready var hpbar = $"HP"
 
 @onready var ftime = $"Fire"
+@onready var ptime = $"Poison"
 @onready var stime = $"Stun"
 
 @onready var statuspart = $"Sprite/StatusParticles"
 @onready var fpart = $"Sprite/StatusParticles/Fire"
+@onready var ppart = $"Sprite/StatusParticles/Poison"
 
 @onready var type = 1 # type of jelly
 @onready var tier = 1 # difficulty
@@ -82,13 +84,20 @@ func _physics_process(delta: float) -> void:
 			fpart.visible = true
 		else:
 			fpart.visible = false
+		if status.has("poison"):
+			ppart.visible = true
+		else:
+			ppart.visible = false
 	else:
 		statuspart.visible = false
 
 func take_damage(n, p, e, s, kb) -> void: # TODO: make global??
 	damageFlash()
+	var multi = 1.0
+	if status.has("poison"):
+		multi *= 1.5
 	# TODO: damage numbers, grey when the damage lowered a lot by def and yellow when increased by neg defense
-	health -= ((n * 100 / (100 + defN)) + (p * 100 / (100 + defP)) + (e * 100 / (100 + defE)) + (s * 100 / (100 + defS))) # TODO: def calcs
+	health -= multi * ((n * 100 / (100 + defN)) + (p * 100 / (100 + defP)) + (e * 100 / (100 + defE)) + (s * 100 / (100 + defS))) # TODO: def calcs
 	# print(health)
 	if health <= 0 && !dead:
 		die()
@@ -113,7 +122,7 @@ func inflict(c, i):
 		"fire":
 			ftime.start(i * 100 / (100 + fireRes))
 		"poison":
-			statusTimer = i * 100 / (100 + poisonRes)
+			ptime.start(i * 100 / (100 + poisonRes))
 		"freeze":
 			statusTimer = i * 100 / (100 + freezeRes)
 		"stun":
@@ -137,24 +146,32 @@ func die():
 		mtemp.pos = global_position + Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
 		get_parent().call_deferred("add_child", mtemp)
 		mtemp = null
-	for i in randi_range(0, 1):
+	for i in randi_range(0, tier):
 		var mtemp = medallionSC.instantiate()
 		mtemp.value = 10
 		mtemp.pos = global_position + Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
 		get_parent().call_deferred("add_child", mtemp)
 		mtemp = null
-	for i in randi_range(0, 1):
+	for i in randi_range(0, tier):
 		var mtemp = materialSC.instantiate()
 		mtemp.item = "plasmium"
 		mtemp.pos = global_position + Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
 		get_parent().call_deferred("add_child", mtemp)
 		mtemp = null
+	Global.t1_drop(global_position)
 	queue_free()
 
 func _on_hurtbox_area_entered(area: Area2D) -> void: # TODO: make a hitbox and move this to the hitbox, for attack animations and stuff
 	if area.is_in_group("hurtbox") && area.get_parent().is_in_group("player"):
-		area.get_parent().take_damage(damage, dmgP, dmgE, dmgS)
+		var multi = 1.0
+		if status.has("poison"):
+			multi *= 0.5
+		area.get_parent().take_damage(multi * damage, multi * dmgP, multi * dmgE, multi * dmgS)
 
 func _on_fire_timeout() -> void:
 	if status.has("fire"):
 		status.remove_at(status.find("fire"))
+
+func _on_poison_timeout() -> void:
+	if status.has("poison"):
+		status.remove_at(status.find("poison"))

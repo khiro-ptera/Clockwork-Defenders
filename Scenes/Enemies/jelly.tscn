@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhu2tdu5i6px5"]
+[gd_scene load_steps=14 format=3 uid="uid://bhu2tdu5i6px5"]
 
 [ext_resource type="Script" uid="uid://b3lyv5scusddn" path="res://Scripts/Enemies/jelly.gd" id="1_onqpf"]
 [ext_resource type="Texture2D" uid="uid://5567cy8wq0ty" path="res://Assets/sprites/enemies/jelly/1.png" id="1_plco2"]
 [ext_resource type="Texture2D" uid="uid://bv38ehc51o0lw" path="res://Assets/sprites/enemies/jelly/damage.png" id="2_fn1pt"]
 [ext_resource type="Texture2D" uid="uid://b0gkgb2uhf1k3" path="res://Assets/sprites/particles/fire.png" id="3_choo6"]
 [ext_resource type="Texture2D" uid="uid://btna746pcs0ue" path="res://Assets/sprites/enemies/enemyHP/back.png" id="4_pnfmr"]
+[ext_resource type="Texture2D" uid="uid://dig6j0iyg3uf6" path="res://Assets/sprites/particles/poison.png" id="4_tuwbm"]
 [ext_resource type="Texture2D" uid="uid://b8815gnamy1x0" path="res://Assets/sprites/enemies/enemyHP/over.png" id="5_choo6"]
 [ext_resource type="Texture2D" uid="uid://bwd7ehmipy1s3" path="res://Assets/sprites/enemies/enemyHP/fill.png" id="6_tuwbm"]
 
@@ -59,6 +60,23 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_choo6")
 color_ramp = SubResource("Gradient_choo6")
 
+[node name="Poison" type="CPUParticles2D" parent="Sprite/StatusParticles"]
+texture = ExtResource("4_tuwbm")
+lifetime = 1.2
+randomness = 0.35
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(16, 12)
+spread = 180.0
+gravity = Vector2(0, -15)
+initial_velocity_max = 6.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+linear_accel_max = 1.0
+scale_amount_min = 0.5
+hue_variation_min = -0.5
+hue_variation_max = 0.5
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fn1pt")
 
@@ -93,5 +111,8 @@ texture_progress = ExtResource("6_tuwbm")
 
 [node name="Fire" type="Timer" parent="."]
 
+[node name="Poison" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]
+[connection signal="timeout" from="Poison" to="." method="_on_poison_timeout"]

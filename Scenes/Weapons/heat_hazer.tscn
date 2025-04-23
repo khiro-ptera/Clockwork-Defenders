@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4mldgqvdt84"]
+
+[ext_resource type="Script" uid="uid://b553snv5s4ab3" path="res://Scripts/Weapons/Bombs/heat_hazer.gd" id="1_etk24"]
+[ext_resource type="Texture2D" uid="uid://ckiqnst7obo35" path="res://Assets/sprites/weapons/bombs/HeatHazer.png" id="2_lxhhd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vm4xm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lxhhd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HeatHazer" type="Node2D" groups=["bomb", "weapon"]]
+script = ExtResource("1_etk24")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vm4xm")
+offset = Vector2(32, 0)

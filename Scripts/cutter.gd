@@ -12,8 +12,8 @@ extends Node2D
 @onready var maxCombo = 5
 @onready var endlag = 0.2
 @onready var combolag = 0.8
-@onready var damage = 18
-@onready var damageP = 0
+@onready var damage = 25
+@onready var damageP = 5
 @onready var damageE = 0
 @onready var damageS = 0
 @onready var charge = 2.0

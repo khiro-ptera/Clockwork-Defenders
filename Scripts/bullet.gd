@@ -54,6 +54,14 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		area.get_parent().take_damage(damage, dp, de, ds, kb)
 		if randf_range(0.0, 1.0) < fire.x:
 			area.get_parent().inflict("fire", fire.y)
+		if randf_range(0.0, 1.0) < shock.x:
+			area.get_parent().inflict("shock", shock.y)
+		if randf_range(0.0, 1.0) < poison.x:
+			area.get_parent().inflict("poison", poison.y)
+		if randf_range(0.0, 1.0) < freeze.x:
+			area.get_parent().inflict("freeze", freeze.y)
+		if randf_range(0.0, 1.0) < curse.x:
+			area.get_parent().inflict("curse", curse.y)
 		if pierce <= 0:
 			queue_free()
 		else: 

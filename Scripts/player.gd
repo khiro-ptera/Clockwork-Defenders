@@ -23,11 +23,14 @@ var wep2 = preload("res://Scenes/proto_gun.tscn")
 var wep3 = preload("res://Scenes/proto_bomb.tscn")
 var wep4 = preload("res://Scenes/cutter.tscn")
 var wep5 = preload("res://Scenes/Weapons/hot_shot.tscn")
+var wep6 = preload("res://Scenes/Weapons/heat_hazer.tscn")
+var wep7 = preload("res://Scenes/Weapons/hazer.tscn")
+var wep8 = preload("res://Scenes/Weapons/vile_hazer.tscn")
 
 # var uiSC = preload("res://Scenes/main_ui.tscn")
 
 var active = 0
-var weapons = [1, 2, 3, 5]
+var weapons = [8, 7, 6, 5]
 var combo = 0
 var comboTimer = 0.0
 var endlag = 0.0
@@ -193,8 +196,16 @@ func swapWeapon():
 			var wep = wep4.instantiate()
 			add_child(wep)
 		5:
-			# print("switch 4")
 			var wep = wep5.instantiate()
+			add_child(wep)
+		6:
+			var wep = wep6.instantiate()
+			add_child(wep)
+		7:
+			var wep = wep7.instantiate()
+			add_child(wep)
+		8:
+			var wep = wep8.instantiate()
 			add_child(wep)
 
 func take_damage(n, p, e, s):
