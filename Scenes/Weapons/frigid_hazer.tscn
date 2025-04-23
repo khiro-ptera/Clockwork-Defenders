@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccyx2670ql2mh"]
+
+[ext_resource type="Script" uid="uid://dxt33oj4bsx7t" path="res://frigid_hazer.gd" id="1_prjaj"]
+[ext_resource type="Texture2D" uid="uid://djjy6miwekv0k" path="res://Assets/sprites/weapons/bombs/FrigidHazer.png" id="2_3figj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vbqdp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3figj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FrigidHazer" type="Node2D" groups=["bomb", "weapon"]]
+script = ExtResource("1_prjaj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vbqdp")

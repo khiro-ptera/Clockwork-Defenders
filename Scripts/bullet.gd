@@ -40,6 +40,10 @@ func _ready() -> void:
 			sprite.play("hot")
 			shape = "circle"
 			fire = Vector2(0.25, 3.0)
+		10:
+			sprite.play("rook")
+			shape = "circle"
+			stun = Vector2(0.5, 3.0)
 
 func _physics_process(delta: float) -> void:
 	velocity = Vector2(speed, 0.0).rotated(rotation)
@@ -56,6 +60,8 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			area.get_parent().inflict("fire", fire.y)
 		if randf_range(0.0, 1.0) < shock.x:
 			area.get_parent().inflict("shock", shock.y)
+		if randf_range(0.0, 1.0) < stun.x:
+			area.get_parent().inflict("stun", stun.y)
 		if randf_range(0.0, 1.0) < poison.x:
 			area.get_parent().inflict("poison", poison.y)
 		if randf_range(0.0, 1.0) < freeze.x:

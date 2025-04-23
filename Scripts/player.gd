@@ -26,11 +26,13 @@ var wep5 = preload("res://Scenes/Weapons/hot_shot.tscn")
 var wep6 = preload("res://Scenes/Weapons/heat_hazer.tscn")
 var wep7 = preload("res://Scenes/Weapons/hazer.tscn")
 var wep8 = preload("res://Scenes/Weapons/vile_hazer.tscn")
+var wep9 = preload("res://Scenes/Weapons/frigid_hazer.tscn")
+var wep10 = preload("res://Scenes/Weapons/rook.tscn")
 
 # var uiSC = preload("res://Scenes/main_ui.tscn")
 
 var active = 0
-var weapons = [8, 7, 6, 5]
+var weapons = [10, 7, 6, 9]
 var combo = 0
 var comboTimer = 0.0
 var endlag = 0.0
@@ -206,6 +208,12 @@ func swapWeapon():
 			add_child(wep)
 		8:
 			var wep = wep8.instantiate()
+			add_child(wep)
+		9:
+			var wep = wep9.instantiate()
+			add_child(wep)
+		10:
+			var wep = wep10.instantiate()
 			add_child(wep)
 
 func take_damage(n, p, e, s):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bhu2tdu5i6px5"]
+[gd_scene load_steps=20 format=3 uid="uid://bhu2tdu5i6px5"]
 
 [ext_resource type="Script" uid="uid://b3lyv5scusddn" path="res://Scripts/Enemies/jelly.gd" id="1_onqpf"]
 [ext_resource type="Texture2D" uid="uid://5567cy8wq0ty" path="res://Assets/sprites/enemies/jelly/1.png" id="1_plco2"]
@@ -7,7 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://btna746pcs0ue" path="res://Assets/sprites/enemies/enemyHP/back.png" id="4_pnfmr"]
 [ext_resource type="Texture2D" uid="uid://dig6j0iyg3uf6" path="res://Assets/sprites/particles/poison.png" id="4_tuwbm"]
 [ext_resource type="Texture2D" uid="uid://b8815gnamy1x0" path="res://Assets/sprites/enemies/enemyHP/over.png" id="5_choo6"]
+[ext_resource type="Texture2D" uid="uid://cbw118glbknii" path="res://Assets/sprites/particles/freeze.png" id="5_s2fhi"]
+[ext_resource type="Texture2D" uid="uid://dllc0sp157hu5" path="res://Assets/sprites/particles/shock.png" id="6_g77st"]
 [ext_resource type="Texture2D" uid="uid://bwd7ehmipy1s3" path="res://Assets/sprites/enemies/enemyHP/fill.png" id="6_tuwbm"]
+[ext_resource type="Texture2D" uid="uid://o612dublr6es" path="res://Assets/sprites/particles/curse.png" id="7_7g234"]
+[ext_resource type="Texture2D" uid="uid://d21rfge3oj3ri" path="res://Assets/sprites/particles/stun.png" id="8_l5wq6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_onqpf"]
 animations = [{
@@ -27,6 +31,13 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_choo6"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.32549)
 
+[sub_resource type="Gradient" id="Gradient_g77st"]
+offsets = PackedFloat32Array(0.00666667, 0.206667, 0.506667, 0.786667, 1)
+colors = PackedColorArray(1, 1, 1, 0.227451, 1, 1, 1, 0.803922, 1, 1, 1, 1, 1, 1, 1, 0.803922, 1, 1, 1, 0.227451)
+
+[sub_resource type="Gradient" id="Gradient_50se4"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.611765)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fn1pt"]
 size = Vector2(10, 10)
 
@@ -42,6 +53,7 @@ sprite_frames = SubResource("SpriteFrames_onqpf")
 [node name="StatusParticles" type="Node2D" parent="Sprite"]
 
 [node name="Fire" type="CPUParticles2D" parent="Sprite/StatusParticles"]
+visible = false
 amount = 10
 texture = ExtResource("3_choo6")
 lifetime = 1.5
@@ -61,6 +73,7 @@ scale_amount_curve = SubResource("Curve_choo6")
 color_ramp = SubResource("Gradient_choo6")
 
 [node name="Poison" type="CPUParticles2D" parent="Sprite/StatusParticles"]
+visible = false
 texture = ExtResource("4_tuwbm")
 lifetime = 1.2
 randomness = 0.35
@@ -76,6 +89,83 @@ linear_accel_max = 1.0
 scale_amount_min = 0.5
 hue_variation_min = -0.5
 hue_variation_max = 0.5
+
+[node name="Freeze" type="CPUParticles2D" parent="Sprite/StatusParticles"]
+visible = false
+amount = 25
+texture = ExtResource("5_s2fhi")
+lifetime = 2.5
+explosiveness = 0.5
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(16, 16)
+spread = 180.0
+gravity = Vector2(0, 0.5)
+angle_min = -10.0
+angle_max = 10.0
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+color_ramp = SubResource("Gradient_g77st")
+
+[node name="Shock" type="CPUParticles2D" parent="Sprite/StatusParticles"]
+visible = false
+amount = 15
+texture = ExtResource("6_g77st")
+lifetime = 0.1
+randomness = 0.3
+lifetime_randomness = 0.2
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(16, 16)
+spread = 120.0
+gravity = Vector2(0, -10)
+damping_max = 5.0
+angle_min = -5.0
+angle_max = 5.0
+scale_amount_min = 0.6
+scale_amount_max = 0.7
+
+[node name="Curse" type="CPUParticles2D" parent="Sprite/StatusParticles"]
+visible = false
+amount = 20
+texture = ExtResource("7_7g234")
+lifetime = 4.0
+randomness = 0.5
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(16, 16)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+angular_velocity_min = 20.0
+angular_velocity_max = 40.0
+orbit_velocity_min = -0.5
+orbit_velocity_max = 0.5
+linear_accel_min = -1.0
+linear_accel_max = 1.0
+radial_accel_max = 5.0
+scale_amount_min = 0.4
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[node name="Stun" type="CPUParticles2D" parent="Sprite/StatusParticles"]
+visible = false
+texture = ExtResource("8_l5wq6")
+lifetime = 5.0
+explosiveness = 1.0
+local_coords = true
+emission_shape = 2
+emission_sphere_radius = 16.0
+spread = 180.0
+gravity = Vector2(0, 0)
+angular_velocity_min = 20.0
+angular_velocity_max = 20.0
+orbit_velocity_min = -0.01
+orbit_velocity_max = 0.01
+scale_amount_min = 1.2
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_50se4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fn1pt")
@@ -113,6 +203,16 @@ texture_progress = ExtResource("6_tuwbm")
 
 [node name="Poison" type="Timer" parent="."]
 
+[node name="Freeze" type="Timer" parent="."]
+
+[node name="Shock" type="Timer" parent="."]
+
+[node name="Curse" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="Stun" to="." method="_on_stun_timeout"]
 [connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]
 [connection signal="timeout" from="Poison" to="." method="_on_poison_timeout"]
+[connection signal="timeout" from="Freeze" to="." method="_on_freeze_timeout"]
+[connection signal="timeout" from="Shock" to="." method="_on_shock_timeout"]
+[connection signal="timeout" from="Curse" to="." method="_on_curse_timeout"]

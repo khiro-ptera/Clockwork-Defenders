@@ -37,6 +37,7 @@ func _ready() -> void:
 		6: sprite.play("heat_hazer")
 		7: sprite.play("hazer")
 		8: sprite.play("vile_hazer")
+		9: sprite.play("frigid_hazer")
 
 func _process(delta: float) -> void:
 	time += delta

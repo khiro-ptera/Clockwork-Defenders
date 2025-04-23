@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dd66ft8elph5g"]
+[gd_scene load_steps=12 format=3 uid="uid://dd66ft8elph5g"]
 
 [ext_resource type="Script" uid="uid://dd7isxaivt05l" path="res://Scripts/armed_bomb.gd" id="1_3nbew"]
 [ext_resource type="Texture2D" uid="uid://bhas5onc2qexb" path="res://Assets/sprites/protobomb.png" id="2_xg12h"]
 [ext_resource type="Texture2D" uid="uid://ckiqnst7obo35" path="res://Assets/sprites/weapons/bombs/HeatHazer.png" id="3_1ug32"]
 [ext_resource type="Texture2D" uid="uid://cmtmqipferq3h" path="res://Assets/sprites/weapons/bombs/Hazer.png" id="3_8fbhn"]
 [ext_resource type="Texture2D" uid="uid://6wpbi1dysh3l" path="res://Assets/sprites/detCircle.png" id="3_jb330"]
+[ext_resource type="Texture2D" uid="uid://djjy6miwekv0k" path="res://Assets/sprites/weapons/bombs/FrigidHazer.png" id="3_rt7bd"]
 [ext_resource type="Texture2D" uid="uid://dotcidpdr8cff" path="res://Assets/sprites/particles/explosion1.png" id="3_xg12h"]
 [ext_resource type="Texture2D" uid="uid://ckn1l8rf85r0c" path="res://Assets/sprites/detFill.png" id="4_1ug32"]
 [ext_resource type="Texture2D" uid="uid://s3iut2bff5pa" path="res://Assets/sprites/weapons/bombs/VileHazer.png" id="5_8fbhn"]
@@ -17,6 +18,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_rt7bd")
+}],
+"loop": true,
+"name": &"frigid_hazer",
 "speed": 5.0
 }, {
 "frames": [{
@@ -54,7 +63,7 @@ script = ExtResource("1_3nbew")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_qqqqj")
-animation = &"vile_hazer"
+animation = &"frigid_hazer"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
 emitting = false

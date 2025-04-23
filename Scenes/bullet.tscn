@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cog4hpiqudh3n"]
+[gd_scene load_steps=8 format=3 uid="uid://cog4hpiqudh3n"]
 
 [ext_resource type="Script" uid="uid://duq22qbi5sar2" path="res://Scripts/bullet.gd" id="1_oduel"]
 [ext_resource type="Texture2D" uid="uid://cxluur6mdygqy" path="res://Assets/sprites/projectiles/hot.png" id="2_6afsh"]
 [ext_resource type="Texture2D" uid="uid://x4jqi1j5lf26" path="res://Assets/sprites/projectiles/proto.png" id="2_ycag2"]
+[ext_resource type="Texture2D" uid="uid://t853m3ae22oo" path="res://Assets/sprites/projectiles/rook.png" id="4_6afsh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6afsh"]
 animations = [{
@@ -21,6 +22,14 @@ animations = [{
 "loop": true,
 "name": &"proto",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_6afsh")
+}],
+"loop": true,
+"name": &"rook",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_odot3"]
@@ -34,7 +43,7 @@ script = ExtResource("1_oduel")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6afsh")
-animation = &"hot"
+animation = &"rook"
 
 [node name="Circle" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_odot3")
