@@ -42,11 +42,11 @@ var currentCharge = 0.0
 var currIframes = 0.5
 
 var boosting = false
+var recoiling = false
 
 func _ready() -> void:
 	chargebar.visible = false
-	var wep = wep1.instantiate()
-	add_child(wep)
+	swapWeapon()
 	
 	# var uii = uiSC.instantiate()
 	# cam.add_child(uii)
@@ -55,6 +55,8 @@ func get_input():
 	var input_direction = Input.get_vector("Left", "Right", "Up", "Down")
 	if boosting:
 		velocity = 1.8 * speed * get_local_mouse_position() / (sqrt(get_local_mouse_position().x * get_local_mouse_position().x + get_local_mouse_position().y * get_local_mouse_position().y))
+	elif recoiling:
+		velocity = -1.8 * speed * get_local_mouse_position() / (sqrt(get_local_mouse_position().x * get_local_mouse_position().x + get_local_mouse_position().y * get_local_mouse_position().y))
 	elif endlag > 0.0:
 		velocity = input_direction * speed * 0.1
 	elif prevframeM1:
@@ -224,16 +226,30 @@ func take_damage(n, p, e, s):
 	if currIframes <= 0.0:
 		health -= ((n * 100 / (100 + def)) + (p * 100 / (100 + defP)) + (e * 100 / (100 + defE)) + (s * 100 / (100 + defS)))
 		currIframes = iframes
-	
+
 func boost(time):
 	boosting = true
 	await get_tree().create_timer(time).timeout
 	boosting = false
 
+func recoil(time):
+	recoiling = true
+	await get_tree().create_timer(time).timeout
+	recoiling = false
+
 func collect(item, quantity):
 	if item == "medallion":
 		medallions += quantity
 	else:
-		var invitem = InvItem.new(item)
-		inv.items.append(invitem)
-		get_parent().ui.get_child(0).update(invitem)
+		var hasItem = false
+		for i in inv.items:
+			if i != null:
+				if i.name == item:
+					i.count += quantity
+					get_parent().ui.get_child(0).increase(item, quantity)
+					hasItem = true
+					break
+		if !hasItem:
+			var invitem = InvItem.new(item)
+			inv.items.append(invitem)
+			get_parent().ui.get_child(0).update(invitem)

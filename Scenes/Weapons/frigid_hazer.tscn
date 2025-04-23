@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ccyx2670ql2mh"]
 
-[ext_resource type="Script" uid="uid://dxt33oj4bsx7t" path="res://frigid_hazer.gd" id="1_prjaj"]
+[ext_resource type="Script" uid="uid://dxt33oj4bsx7t" path="res://Scripts/Weapons/Bombs/frigid_hazer.gd" id="1_prjaj"]
 [ext_resource type="Texture2D" uid="uid://djjy6miwekv0k" path="res://Assets/sprites/weapons/bombs/FrigidHazer.png" id="2_3figj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vbqdp"]

@@ -27,10 +27,12 @@ func _ready() -> void:
 func lightAttack(combo: int) -> void:
 	match combo:
 		1:
+			get_parent().recoil(0.05)
 			fire(damage, bulletSpeed, Vector2(1.5, 1.5), 1.0, kb, damageP, damageE, damageS, 1)
 			ap.play("firereload")
 
 func chargedAttack() -> void:
+	get_parent().recoil(0.1)
 	fire(damage * 2.4, bulletSpeed * 1.2, Vector2(2.8, 2.8), 1.2, 1.5 * kb, damageP, damageE, damageS, 20)
 	ap.play("charge")
 

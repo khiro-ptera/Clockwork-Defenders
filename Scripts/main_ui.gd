@@ -46,4 +46,9 @@ func update(item: InvItem):
 	# print(item.name)
 	tempi.setItem(item.texture, item.name)
 	items.add_child(tempi)
-	
+
+func increase(item: String, c = 1):
+	for i in items.get_children():
+		if i.getItem() == item:
+			i.increase(c)
+			break
