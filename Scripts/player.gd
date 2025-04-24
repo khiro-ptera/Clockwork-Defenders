@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var chargebar = $"TextureProgressBar"
 @onready var cam = $"Camera2D"
 
-@export var speed = 400
+@export var speed = 350
 var ctrMult = 1.0
 var asiMult = 1.0
 
@@ -241,9 +241,13 @@ func recoil(time):
 	await get_tree().create_timer(time).timeout
 	recoiling = false
 
-func collect(item, quantity):
+func collect(item, quantity, star = 0, recipeno = 0):
 	if item == "medallion":
 		medallions += quantity
+	elif recipeno != 0:
+		var invitem = InvItem.new(item, star, recipeno)
+		inv.items.append(invitem)
+		get_parent().ui.get_child(0).update(invitem)
 	else:
 		var hasItem = false
 		for i in inv.items:
@@ -254,6 +258,6 @@ func collect(item, quantity):
 					hasItem = true
 					break
 		if !hasItem:
-			var invitem = InvItem.new(item)
+			var invitem = InvItem.new(item, star)
 			inv.items.append(invitem)
 			get_parent().ui.get_child(0).update(invitem)

@@ -44,7 +44,11 @@ func update(item: InvItem):
 	# tempi.label = item.name
 	# print(tempi.label)
 	# print(item.name)
-	tempi.setItem(item.texture, item.name)
+	if item.schema != 0:
+		var wname = Global.wdict.find_key(item.schema)
+		tempi.setItem(item.texture, wname + " schema")
+	else:
+		tempi.setItem(item.texture, item.name)
 	items.add_child(tempi)
 
 func increase(item: String, c = 1):

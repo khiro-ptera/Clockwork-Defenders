@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3m6vobwh6uy5"]
+[gd_scene load_steps=17 format=3 uid="uid://c3m6vobwh6uy5"]
 
 [ext_resource type="Script" uid="uid://wtydp4s1f5k8" path="res://Scripts/material_drop.gd" id="1_iq5c1"]
 [ext_resource type="Texture2D" uid="uid://c7l2oj8u1wf8f" path="res://Assets/sprites/drops/materials/beryllium.png" id="2_5j56g"]
@@ -6,8 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://1hpjuu07rj2j" path="res://Assets/sprites/drops/materials/coballium.png" id="4_jgt8u"]
 [ext_resource type="Texture2D" uid="uid://dy4l18oox485h" path="res://Assets/sprites/drops/materials/exxollium.png" id="5_dnjiw"]
 [ext_resource type="Texture2D" uid="uid://dtc6lvxvffyoi" path="res://Assets/sprites/drops/materials/plasmium.png" id="6_cwh6e"]
+[ext_resource type="Texture2D" uid="uid://t7p71r2kprav" path="res://Assets/sprites/drops/schemas/1star.png" id="7_cwh6e"]
 [ext_resource type="Texture2D" uid="uid://cc7yt1apkcgnl" path="res://Assets/sprites/drops/materials/voidfragment.png" id="7_elnby"]
+[ext_resource type="Texture2D" uid="uid://byvawidqige3m" path="res://Assets/sprites/drops/schemas/2star.png" id="8_elnby"]
 [ext_resource type="Texture2D" uid="uid://bc0jiqodikos1" path="res://Assets/sprites/drops/materials/warrellium.png" id="8_r6pow"]
+[ext_resource type="Texture2D" uid="uid://cm6wlsrygtp4m" path="res://Assets/sprites/drops/schemas/3star.png" id="9_r6pow"]
+[ext_resource type="Texture2D" uid="uid://fo5rwqiiyr22" path="res://Assets/sprites/drops/schemas/4star.png" id="10_nwnpq"]
+[ext_resource type="Texture2D" uid="uid://dvxeb7pewev48" path="res://Assets/sprites/drops/schemas/5star.png" id="11_88ej7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwnpq"]
 
@@ -55,6 +60,46 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("7_cwh6e")
+}],
+"loop": true,
+"name": &"schema1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_elnby")
+}],
+"loop": true,
+"name": &"schema2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_r6pow")
+}],
+"loop": true,
+"name": &"schema3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_nwnpq")
+}],
+"loop": true,
+"name": &"schema4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_88ej7")
+}],
+"loop": true,
+"name": &"schema5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("7_elnby")
 }],
 "loop": true,
@@ -82,7 +127,7 @@ shape = SubResource("RectangleShape2D_nwnpq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Material"]
 sprite_frames = SubResource("SpriteFrames_88ej7")
-animation = &"warrellium"
+animation = &"schema5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0plpw")

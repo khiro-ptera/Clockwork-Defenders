@@ -202,7 +202,7 @@ func die():
 		mtemp.pos = global_position + Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
 		get_parent().call_deferred("add_child", mtemp)
 		mtemp = null
-	Global.t1_drop(global_position)
+	Global.t1_drop(global_position, get_parent())
 	queue_free()
 
 func _on_hurtbox_area_entered(area: Area2D) -> void: # TODO: make a hitbox and move this to the hitbox, for attack animations and stuff

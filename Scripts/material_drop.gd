@@ -4,6 +4,10 @@ extends CharacterBody2D
 
 @onready var item
 
+var schema = 0
+
+var star = 0
+
 var pos
 var suck = false
 var playerArea
@@ -29,5 +33,5 @@ func _on_material_area_entered(area: Area2D) -> void:
 
 func _on_material_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		body.collect(str(item), 1)
+		body.collect(str(item), 1, star, schema)
 		queue_free()
