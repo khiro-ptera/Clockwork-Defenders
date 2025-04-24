@@ -47,6 +47,10 @@ func _ready() -> void:
 		11:
 			sprite.play("scatter")
 			shape = "circle"
+		12:
+			sprite.play("injektor")
+			shape = "circle"
+			poison = Vector2(0.2, 3.0)
 
 func _physics_process(delta: float) -> void:
 	velocity = Vector2(speed, 0.0).rotated(rotation)

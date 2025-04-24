@@ -5,6 +5,7 @@ extends Node2D
 var playerSC = preload("res://Scenes/player.tscn")
 var jellySC = preload("res://Scenes/Enemies/jelly.tscn")
 var uiSC = preload("res://Scenes/main_ui.tscn")
+var shopSC = preload("res://Scenes/shop.tscn")
 
 var p
 var ui
@@ -19,6 +20,10 @@ func _ready() -> void:
 	
 	var uii = uiSC.instantiate()
 	UICL.add_child(uii)
+	
+	var shopi = shopSC.instantiate()
+	shopi.global_position = Vector2(100.0, 100.0)
+	add_child(shopi)
 	
 	for i in 3:
 		spawnJelly()

@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var medallionSC = preload("res://Scenes/medallion.tscn")
 var materialSC = preload("res://Scenes/material_drop.tscn")
+var dmgnSC = preload("res://Scenes/dmg_number.tscn")
 
 @onready var dmgOverlay = $"Damage"
 @onready var sprite = $"Sprite"
@@ -81,7 +82,7 @@ func _physics_process(delta: float) -> void:
 	dirNode.look_at(player.get_global_position())
 	velocity = Vector2(speed, 0.0).rotated(dirNode.rotation)
 	if status.has("stun"):
-		velocity = Vector2(speed / 2, 0.0).rotated(dirNode.rotation + randf_range(-2.0, 2.0))
+		velocity = Vector2(speed / 1.5, 0.0).rotated(dirNode.rotation + randf_range(-2.0, 2.0))
 	if status.has("freeze"):
 		velocity = Vector2(0.0, 0.0)
 	if status.has("shock"):
@@ -132,6 +133,12 @@ func take_damage(n, p, e, s, kb) -> void: # TODO: make global??
 	var tempdmg = multi * ((n * 100 / (100 + defN)) + (p * 100 / (100 + defP)) + (e * 100 / (100 + defE)) + (s * 100 / (100 + defS)))
 	health -= tempdmg
 	# print(health)
+	
+	if tempdmg > 1.0:
+		var numb = dmgnSC.instantiate()
+		numb.global_position = global_position
+		numb.amount = tempdmg
+		get_parent().call_deferred("add_child", numb)
 	
 	if status.has("freeze"):
 		if randf_range(0.0, 1.0) < 0.5 * tempdmg:

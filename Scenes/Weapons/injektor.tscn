@@ -1,0 +1,146 @@
+[gd_scene load_steps=14 format=3 uid="uid://ca8ovevklq3et"]
+
+[ext_resource type="Script" uid="uid://ki6a124pqt2i" path="res://Scripts/Weapons/Guns/injektor.gd" id="1_wj83g"]
+[ext_resource type="Texture2D" uid="uid://du6bp0qkmmqs1" path="res://Assets/sprites/weapons/guns/injektor.png" id="2_gbuwr"]
+[ext_resource type="Texture2D" uid="uid://d1y7e0v68icls" path="res://Assets/sprites/weapons/guns/injektor2.png" id="3_sxv01"]
+[ext_resource type="Texture2D" uid="uid://b2om73yjtkjjv" path="res://Assets/sprites/weapons/guns/injektor3.png" id="4_hcapl"]
+[ext_resource type="Texture2D" uid="uid://vm6enw4myppv" path="res://Assets/sprites/weapons/guns/injektor4.png" id="5_1yyk2"]
+[ext_resource type="Texture2D" uid="uid://ccgv37jly1i0g" path="res://Assets/sprites/weapons/guns/injektor5.png" id="6_sgu4m"]
+[ext_resource type="Texture2D" uid="uid://b2shscwuqp7cx" path="res://Assets/sprites/weapons/guns/injektor6.png" id="7_hojos"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2hq5w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gbuwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sxv01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hcapl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1yyk2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_sgu4m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_hojos")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_wj83g"]
+resource_name = "fire"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0667, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_gbuwr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sxv01"]
+resource_name = "firereload"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.166667, 0.3, 0.5, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.261799, 0.0, 0.0, 0.349066, 0.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-12, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hcapl"]
+resource_name = "charge"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.349066, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sxv01"]
+_data = {
+&"RESET": SubResource("Animation_gbuwr"),
+&"charge": SubResource("Animation_hcapl"),
+&"fire": SubResource("Animation_wj83g"),
+&"firereload": SubResource("Animation_sxv01")
+}
+
+[node name="Injektor" type="Node2D" groups=["gun", "weapon"]]
+script = ExtResource("1_wj83g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2hq5w")
+frame_progress = 0.537369
+offset = Vector2(32, 0)
+
+[node name="Muzzle" type="Node2D" parent="AnimatedSprite2D"]
+position = Vector2(64, -7)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_sxv01")
+}

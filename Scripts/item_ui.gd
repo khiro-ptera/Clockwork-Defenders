@@ -6,7 +6,7 @@ extends MarginContainer
 func setItem(i, l, c = 1, clickable = false):
 	$"HBoxContainer/Icon".texture = i
 	$"HBoxContainer/Label".text = l
-	$"HBoxContainer2/Count".text = "1"
+	$"HBoxContainer2/Count".text = str(c)
 	if clickable:
 		$"TextureButton".disabled = false
 	else:

@@ -1,0 +1,113 @@
+[gd_scene load_steps=12 format=3 uid="uid://ctthohxxwtgrm"]
+
+[ext_resource type="Texture2D" uid="uid://y8v8em2xijew" path="res://Assets/sprites/npcs/npcPortal.png" id="1_2shtd"]
+[ext_resource type="Script" uid="uid://ch66b8flissgd" path="res://Scripts/shop.gd" id="1_fdj0q"]
+[ext_resource type="Texture2D" uid="uid://bdjgdimn5poe6" path="res://Assets/sprites/particles/portal.png" id="2_io27d"]
+[ext_resource type="Texture2D" uid="uid://bhxrxpbjn1uws" path="res://Assets/sprites/npcs/merchant1.png" id="3_io27d"]
+[ext_resource type="Texture2D" uid="uid://506rg44p8qf7" path="res://Assets/sprites/UI/portalButton.png" id="4_k6jq0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdj0q"]
+radius = 31.0161
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k6jq0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2shtd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_3ps1r"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.370753, 0.000206577, 0.414392, 0.360784, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_k6jq0"]
+font_size = 8
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fdj0q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_io27d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k6jq0"]
+
+[node name="Shop" type="Node2D"]
+z_index = -5
+script = ExtResource("1_fdj0q")
+
+[node name="Portal" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
+shape = SubResource("CircleShape2D_fdj0q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Portal"]
+sprite_frames = SubResource("SpriteFrames_k6jq0")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Portal"]
+amount = 150
+texture = ExtResource("2_io27d")
+lifetime = 2.0
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 28.0
+spread = 180.0
+gravity = Vector2(0, 0)
+angular_velocity_min = 50.0
+angular_velocity_max = 90.0
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.2
+damping_min = 2.0
+damping_max = 2.0
+scale_amount_min = 0.2
+scale_amount_max = 0.7
+color_ramp = SubResource("Gradient_3ps1r")
+
+[node name="TextureButton" type="TextureButton" parent="Portal"]
+z_index = 2
+z_as_relative = false
+offset_right = 64.0
+offset_bottom = 32.0
+texture_normal = ExtResource("4_k6jq0")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Portal/TextureButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Activate
+(100M)"
+label_settings = SubResource("LabelSettings_k6jq0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="M1" type="StaticBody2D" parent="."]
+visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="M1"]
+sprite_frames = SubResource("SpriteFrames_fdj0q")
+offset = Vector2(0, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="M1"]
+position = Vector2(3, -15)
+shape = SubResource("CapsuleShape2D_k6jq0")
+
+[connection signal="body_entered" from="Portal" to="." method="_on_portal_body_entered"]
+[connection signal="body_exited" from="Portal" to="." method="_on_portal_body_exited"]

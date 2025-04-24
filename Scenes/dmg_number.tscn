@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://gks6ax0ekgsb"]
+
+[ext_resource type="Script" uid="uid://biwlek0fq4eli" path="res://Scripts/dmg_number.gd" id="1_wesg6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r4bft"]
+
+[node name="DmgNumber" type="RigidBody2D"]
+script = ExtResource("1_wesg6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r4bft")
+disabled = true
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

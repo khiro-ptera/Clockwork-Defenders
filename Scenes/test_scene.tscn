@@ -9,4 +9,5 @@ script = ExtResource("1_3dogw")
 [node name="UI" type="CanvasLayer" parent="." groups=["UILayer"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -10
 texture = ExtResource("2_r5l72")
