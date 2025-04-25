@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2b3kmemre5xw"]
+
+[ext_resource type="Texture2D" uid="uid://bulrwkq0k5irn" path="res://Assets/sprites/npcs/converter.png" id="1_mutfx"]
+[ext_resource type="Script" uid="uid://b27xy1q72sdxp" path="res://Scripts/converter.gd" id="1_wxb4f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wxb4f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mutfx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_po2ro"]
+size = Vector2(46, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8p6ta"]
+size = Vector2(64, 96)
+
+[node name="Converter" type="Node2D"]
+script = ExtResource("1_wxb4f")
+
+[node name="Schemas" type="MarginContainer" parent="."]
+offset_left = 32.0
+offset_top = -64.0
+offset_right = 96.0
+offset_bottom = 64.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Schemas"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Schemas/ScrollContainer"]
+layout_mode = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StaticBody2D"]
+sprite_frames = SubResource("SpriteFrames_wxb4f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_po2ro")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_8p6ta")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

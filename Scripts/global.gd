@@ -44,6 +44,9 @@ var wdict = {
 	scatterer = 11
 }
 
+
+var knownSchema: Array[int] = []
+
 func t1_drop(pos, scene):
 	var roll = randf_range(0.0, 1.0)
 	if roll < 0.03:

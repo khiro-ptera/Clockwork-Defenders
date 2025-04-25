@@ -46,7 +46,7 @@ func update(item: InvItem):
 	# print(item.name)
 	if item.schema != 0:
 		var wname = Global.wdict.find_key(item.schema)
-		tempi.setItem(item.texture, wname + " schema")
+		tempi.setItem(item.texture, wname + " schema", 1, 1)
 	else:
 		tempi.setItem(item.texture, item.name)
 	items.add_child(tempi)

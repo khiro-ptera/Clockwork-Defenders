@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5bmhbu4i0bwr"]
+[gd_scene load_steps=7 format=3 uid="uid://b5bmhbu4i0bwr"]
 
 [ext_resource type="Script" uid="uid://coaoqlaw1qqs4" path="res://Scripts/item_ui.gd" id="1_0ievn"]
 [ext_resource type="Texture2D" uid="uid://cvqdxl07sxeu3" path="res://Assets/sprites/UI/invItemBack.png" id="1_p3smd"]
 [ext_resource type="Texture2D" uid="uid://bipo67a56pyyt" path="res://Assets/sprites/UI/invItemBlank.png" id="3_crqux"]
+[ext_resource type="Texture2D" uid="uid://beftynxh0s6by" path="res://Assets/sprites/UI/invItem.png" id="3_egmow"]
 [ext_resource type="Texture2D" uid="uid://tdd55qbfekj4" path="res://Assets/sprites/UI/invItemGleam.png" id="4_egmow"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0ievn"]
@@ -57,7 +58,13 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="."]
+z_index = 5
+z_as_relative = false
 layout_mode = 2
-texture_normal = ExtResource("3_crqux")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("3_egmow")
 texture_hover = ExtResource("4_egmow")
 texture_disabled = ExtResource("3_crqux")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
