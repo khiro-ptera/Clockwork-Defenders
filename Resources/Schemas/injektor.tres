@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Schema" load_steps=2 format=3 uid="uid://cf120pjy1u8ut"]
+
+[ext_resource type="Script" uid="uid://drs7x8paa8twk" path="res://Scripts/schema.gd" id="1_on4wr"]
+
+[resource]
+script = ExtResource("1_on4wr")
+wep = 12
+mats = Array[String](["plasmium", "plasmium", "warrellium", "warrellium"])
