@@ -6,6 +6,7 @@ var playerSC = preload("res://Scenes/player.tscn")
 var jellySC = preload("res://Scenes/Enemies/jelly.tscn")
 var uiSC = preload("res://Scenes/main_ui.tscn")
 var shopSC = preload("res://Scenes/shop.tscn")
+var converterSC = preload("res://Scenes/converter.tscn")
 
 var p
 var ui
@@ -24,6 +25,10 @@ func _ready() -> void:
 	var shopi = shopSC.instantiate()
 	shopi.global_position = Vector2(100.0, 100.0)
 	add_child(shopi)
+	
+	var convi = converterSC.instantiate()
+	convi.global_position = Vector2(100.0, -200.0)
+	add_child(convi)
 	
 	for i in 3:
 		spawnJelly()
