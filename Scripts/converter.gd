@@ -3,6 +3,7 @@ extends Node2D
 @onready var schemaBox = $"Schemas"
 @onready var schemaList = $"Schemas/ScrollContainer/VBoxContainer"
 @onready var viewBox = $"Viewer"
+@onready var viewSchema = $"Viewer/ScrollContainer/Label"
 
 var schemaBlockSC = preload("res://Scenes/schema_block.tscn")
 
@@ -20,7 +21,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 		for i in Global.knownSchema:
 			var wname = Global.wdict.find_key(i)
-			var res: Schema = load("res://Resources/Schemas/" + wname + ".tres")
 			var newblock = schemaBlockSC.instantiate()
 			newblock.w = wname
 			newblock.id = schemaList.get_child_count()
@@ -36,4 +36,12 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 func select(w):
 	selected = w
-	print("selected " + selected)
+	var res: Schema = load("res://Resources/Schemas/" + w + ".tres")
+	var str = ""
+	for i in res.mats:
+		str += i + "\n"
+	viewSchema.text = str
+	viewBox.visible = true
+
+func _on_texture_button_pressed() -> void: # craft
+	pass # Replace with function body.

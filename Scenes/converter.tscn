@@ -1,8 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2b3kmemre5xw"]
+[gd_scene load_steps=9 format=3 uid="uid://d2b3kmemre5xw"]
 
 [ext_resource type="Texture2D" uid="uid://bulrwkq0k5irn" path="res://Assets/sprites/npcs/converter.png" id="1_mutfx"]
 [ext_resource type="Script" uid="uid://b27xy1q72sdxp" path="res://Scripts/converter.gd" id="1_wxb4f"]
 [ext_resource type="Texture2D" uid="uid://kaobgt3pe8ln" path="res://Assets/sprites/UI/menu128.png" id="2_po2ro"]
+[ext_resource type="Texture2D" uid="uid://cd3171y7u2j85" path="res://Assets/sprites/UI/button1.png" id="3_8p6ta"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_po2ro"]
+font_size = 8
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wxb4f"]
 animations = [{
@@ -44,21 +49,32 @@ vertical_scroll_mode = 2
 layout_mode = 2
 
 [node name="Viewer" type="MarginContainer" parent="."]
-visible = false
 offset_left = 160.0
 offset_top = -64.0
 offset_right = 288.0
 offset_bottom = 64.0
 
-[node name="Label" type="Label" parent="Viewer"]
-layout_mode = 2
-text = "(none)"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="TextureRect" type="TextureRect" parent="Viewer"]
 layout_mode = 2
 texture = ExtResource("2_po2ro")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Viewer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Viewer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "(none)"
+label_settings = SubResource("LabelSettings_po2ro")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="Viewer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_8p6ta")
+stretch_mode = 0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -75,5 +91,6 @@ shape = SubResource("RectangleShape2D_po2ro")
 position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_8p6ta")
 
+[connection signal="pressed" from="Viewer/TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

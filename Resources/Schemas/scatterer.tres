@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Schema" load_steps=2 format=3 uid="uid://ddkd7bndtvjly"]
+
+[ext_resource type="Script" uid="uid://drs7x8paa8twk" path="res://Scripts/schema.gd" id="1_p6syq"]
+
+[resource]
+script = ExtResource("1_p6syq")
+wep = 11
+mats = Array[String](["beryllium", "beryllium", "beryllium", "beryllium", "simplecore"])

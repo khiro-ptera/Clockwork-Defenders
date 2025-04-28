@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Schema" load_steps=2 format=3 uid="uid://bwetot2x6fjl0"]
+
+[ext_resource type="Script" uid="uid://drs7x8paa8twk" path="res://Scripts/schema.gd" id="1_mfpkn"]
+
+[resource]
+script = ExtResource("1_mfpkn")
+wep = 6
+mats = Array[String](["hazer", "exxollium", "exxollium", "exxollium", "simplecore"])

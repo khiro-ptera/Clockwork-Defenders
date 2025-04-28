@@ -49,7 +49,7 @@ var knownSchema: Array[int] = []
 
 func t1_drop(pos, scene):
 	var roll = randf_range(0.0, 1.0)
-	if roll < 1.03:
+	if roll < 0.05:
 		var mtemp = materialSC.instantiate()
 		mtemp.item = "schema1"
 		mtemp.schema = w1[randi_range(0, w1.size() - 1)]
@@ -57,7 +57,7 @@ func t1_drop(pos, scene):
 		mtemp.pos = pos + Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
 		scene.call_deferred("add_child", mtemp)
 		mtemp = null
-	elif roll < 0.04:
+	elif roll < 0.06:
 		var mtemp = materialSC.instantiate()
 		mtemp.item = "schema2"
 		mtemp.schema = w2[randi_range(0, w2.size() - 1)]
