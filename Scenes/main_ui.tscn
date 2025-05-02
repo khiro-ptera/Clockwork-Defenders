@@ -1,10 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://xdje8dqio1dq"]
+[gd_scene load_steps=14 format=3 uid="uid://xdje8dqio1dq"]
 
 [ext_resource type="Script" uid="uid://2mmcix547ux5" path="res://Scripts/main_ui.gd" id="1_dcbcb"]
 [ext_resource type="Texture2D" uid="uid://oj2yc0y1p5uf" path="res://Assets/sprites/UI/hpback.png" id="2_tbbry"]
 [ext_resource type="Texture2D" uid="uid://impconbbpfck" path="res://Assets/sprites/UI/hpover.png" id="3_7okpu"]
 [ext_resource type="Texture2D" uid="uid://d3xbqblnemga0" path="res://Assets/sprites/UI/hpfill.png" id="4_ylo01"]
 [ext_resource type="Texture2D" uid="uid://b2qs1uv7s8jhm" path="res://Assets/sprites/UI/currencyboard.png" id="5_tbbry"]
+[ext_resource type="Texture2D" uid="uid://cn10q307lnjhb" path="res://Assets/sprites/UI/hotbarbox.png" id="6_7okpu"]
+[ext_resource type="Texture2D" uid="uid://cha1qn433asj6" path="res://Assets/sprites/UI/fill48.png" id="7_pumb7"]
+[ext_resource type="Texture2D" uid="uid://2b3jqglbuiwq" path="res://Assets/sprites/UI/dash1.png" id="7_qnjnk"]
+[ext_resource type="Texture2D" uid="uid://bquovydfhi38b" path="res://Assets/sprites/UI/sheen48.png" id="8_0j338"]
+[ext_resource type="Texture2D" uid="uid://bfsrwy5rmb3e4" path="res://Assets/sprites/UI/selectedW.png" id="8_h8hf5"]
+[ext_resource type="Texture2D" uid="uid://c15j5m2vy12ey" path="res://Assets/sprites/UI/dashover.png" id="9_pumb7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7okpu"]
 font_color = Color(0.000693898, 0.000693898, 0.000693898, 1)
@@ -22,7 +28,6 @@ grow_vertical = 2
 script = ExtResource("1_dcbcb")
 
 [node name="Layer1" type="Control" parent="."]
-z_index = 1
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
@@ -71,7 +76,6 @@ offset_right = 1152.0
 offset_bottom = 648.0
 
 [node name="Layer2" type="Control" parent="."]
-z_index = 2
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
@@ -93,3 +97,103 @@ vertical_scroll_mode = 2
 
 [node name="Items" type="VBoxContainer" parent="Layer2/PlayerTabs/Inventory"]
 layout_mode = 2
+
+[node name="HotBar" type="HBoxContainer" parent="Layer2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -48.0
+offset_right = 128.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="W1" type="MarginContainer" parent="Layer2/HotBar"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Layer2/HotBar/W1"]
+layout_mode = 2
+texture = ExtResource("6_7okpu")
+
+[node name="Icon" type="TextureRect" parent="Layer2/HotBar/W1"]
+layout_mode = 2
+expand_mode = 2
+
+[node name="B1" type="TextureButton" parent="Layer2/HotBar/W1"]
+z_index = 2
+layout_mode = 2
+texture_normal = ExtResource("7_pumb7")
+texture_hover = ExtResource("7_pumb7")
+texture_disabled = ExtResource("8_h8hf5")
+
+[node name="W2" type="MarginContainer" parent="Layer2/HotBar"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Layer2/HotBar/W2"]
+layout_mode = 2
+texture = ExtResource("6_7okpu")
+
+[node name="Icon" type="TextureRect" parent="Layer2/HotBar/W2"]
+layout_mode = 2
+expand_mode = 2
+
+[node name="B2" type="TextureButton" parent="Layer2/HotBar/W2"]
+z_index = 2
+layout_mode = 2
+texture_normal = ExtResource("7_pumb7")
+texture_hover = ExtResource("7_pumb7")
+texture_disabled = ExtResource("8_h8hf5")
+
+[node name="W3" type="MarginContainer" parent="Layer2/HotBar"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Layer2/HotBar/W3"]
+layout_mode = 2
+texture = ExtResource("6_7okpu")
+
+[node name="Icon" type="TextureRect" parent="Layer2/HotBar/W3"]
+layout_mode = 2
+expand_mode = 2
+
+[node name="B3" type="TextureButton" parent="Layer2/HotBar/W3"]
+z_index = 2
+layout_mode = 2
+texture_normal = ExtResource("7_pumb7")
+texture_hover = ExtResource("7_pumb7")
+texture_disabled = ExtResource("8_h8hf5")
+
+[node name="W4" type="MarginContainer" parent="Layer2/HotBar"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Layer2/HotBar/W4"]
+layout_mode = 2
+texture = ExtResource("6_7okpu")
+
+[node name="Icon" type="TextureRect" parent="Layer2/HotBar/W4"]
+layout_mode = 2
+expand_mode = 2
+
+[node name="B4" type="TextureButton" parent="Layer2/HotBar/W4"]
+z_index = 2
+layout_mode = 2
+texture_normal = ExtResource("7_pumb7")
+texture_hover = ExtResource("7_pumb7")
+texture_disabled = ExtResource("8_h8hf5")
+
+[node name="Dash" type="MarginContainer" parent="Layer2/HotBar"]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Layer2/HotBar/Dash"]
+layout_mode = 2
+fill_mode = 5
+texture_under = ExtResource("7_qnjnk")
+texture_over = ExtResource("8_0j338")
+texture_progress = ExtResource("9_pumb7")
+
+[connection signal="pressed" from="Layer2/HotBar/W1/B1" to="." method="_on_b_1_pressed"]
+[connection signal="pressed" from="Layer2/HotBar/W2/B2" to="." method="_on_b_2_pressed"]
+[connection signal="pressed" from="Layer2/HotBar/W3/B3" to="." method="_on_b_3_pressed"]
+[connection signal="pressed" from="Layer2/HotBar/W4/B4" to="." method="_on_b_4_pressed"]

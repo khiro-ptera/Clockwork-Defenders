@@ -48,6 +48,7 @@ var boostMult = 1.0
 var recoiling = false
 
 var dashUp = true
+var dashCD = 3.0
 
 func _ready() -> void:
 	chargebar.visible = false
@@ -132,7 +133,7 @@ func get_input():
 	if Input.is_action_just_pressed("Dash"):
 		if dashUp:
 			dashUp = false
-			dashTimer.start(3.0)
+			dashTimer.start(dashCD)
 			boost(0.08, 3.8)
 
 func _physics_process(delta):
