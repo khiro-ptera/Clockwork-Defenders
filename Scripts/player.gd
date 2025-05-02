@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var chargebar = $"TextureProgressBar"
 @onready var cam = $"Camera2D"
+@onready var dashTimer = $"DashCD"
 
 @export var speed = 350
 var ctrMult = 1.0
@@ -43,7 +44,10 @@ var currentCharge = 0.0
 var currIframes = 0.5
 
 var boosting = false
+var boostMult = 1.0
 var recoiling = false
+
+var dashUp = true
 
 func _ready() -> void:
 	chargebar.visible = false
@@ -55,7 +59,7 @@ func _ready() -> void:
 func get_input():
 	var input_direction = Input.get_vector("Left", "Right", "Up", "Down")
 	if boosting:
-		velocity = 1.8 * speed * get_local_mouse_position() / (sqrt(get_local_mouse_position().x * get_local_mouse_position().x + get_local_mouse_position().y * get_local_mouse_position().y))
+		velocity = 1.8 * boostMult * speed * get_local_mouse_position() / (sqrt(get_local_mouse_position().x * get_local_mouse_position().x + get_local_mouse_position().y * get_local_mouse_position().y))
 	elif recoiling:
 		velocity = -1.8 * speed * get_local_mouse_position() / (sqrt(get_local_mouse_position().x * get_local_mouse_position().x + get_local_mouse_position().y * get_local_mouse_position().y))
 	elif endlag > 0.0:
@@ -124,6 +128,12 @@ func get_input():
 			else:
 				active -= 1
 		swapWeapon()
+	
+	if Input.is_action_just_pressed("Dash"):
+		if dashUp:
+			dashUp = false
+			dashTimer.start(3.0)
+			boost(0.08, 3.8)
 
 func _physics_process(delta):
 	
@@ -231,8 +241,9 @@ func take_damage(n, p, e, s):
 		health -= ((n * 100 / (100 + def)) + (p * 100 / (100 + defP)) + (e * 100 / (100 + defE)) + (s * 100 / (100 + defS)))
 		currIframes = iframes
 
-func boost(time):
+func boost(time, mult = 1.0):
 	boosting = true
+	boostMult = mult
 	await get_tree().create_timer(time).timeout
 	boosting = false
 
@@ -264,3 +275,6 @@ func collect(item, quantity, star = 0, recipeno = 0):
 			inv.items.append(invitem)
 			get_parent().ui.get_child(0).update(invitem)
 		print(inv.items)
+
+func _on_dash_cd_timeout() -> void:
+	dashUp = true

@@ -5,6 +5,8 @@ extends Node2D
 @onready var viewBox = $"Viewer"
 @onready var viewSchema = $"Viewer/ScrollContainer/Label"
 
+# @onready var playerInv = load("res://Resources/Inventory/playerInv.tres")
+
 var schemaBlockSC = preload("res://Scenes/schema_block.tscn")
 
 var selected = ""
@@ -44,4 +46,5 @@ func select(w):
 	viewBox.visible = true
 
 func _on_texture_button_pressed() -> void: # craft
-	pass # Replace with function body.
+	var playerInv = load("res://Resources/Inventory/playerInv.tres")
+	
