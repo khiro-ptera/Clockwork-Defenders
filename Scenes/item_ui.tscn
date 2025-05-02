@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b5bmhbu4i0bwr"]
+[gd_scene load_steps=8 format=3 uid="uid://b5bmhbu4i0bwr"]
 
 [ext_resource type="Script" uid="uid://coaoqlaw1qqs4" path="res://Scripts/item_ui.gd" id="1_0ievn"]
 [ext_resource type="Texture2D" uid="uid://cvqdxl07sxeu3" path="res://Assets/sprites/UI/invItemBack.png" id="1_p3smd"]
@@ -8,6 +8,10 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_0ievn"]
 font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_egmow"]
+font_size = 8
+font_color = Color(0, 0, 0, 1)
 
 [node name="ItemUI" type="MarginContainer"]
 custom_minimum_size = Vector2(144, 48)
@@ -57,6 +61,27 @@ layout_mode = 2
 [node name="Count" type="Label" parent="HBoxContainer2"]
 layout_mode = 2
 
+[node name="DescOverlay" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Cover" type="TextureRect" parent="DescOverlay"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_p3smd")
+
+[node name="Desc" type="Label" parent="DescOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_egmow")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="TextureButton" type="TextureButton" parent="."]
 z_index = 5
 z_as_relative = false
@@ -67,4 +92,6 @@ texture_normal = ExtResource("3_egmow")
 texture_hover = ExtResource("4_egmow")
 texture_disabled = ExtResource("3_crqux")
 
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

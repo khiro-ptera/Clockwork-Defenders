@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://c0btw7flbrdv8"]
+
+[ext_resource type="Script" uid="uid://p3hg1j7q2f4o" path="res://Scripts/Inventory/inventory_item.gd" id="1_m6erx"]
+[ext_resource type="Texture2D" uid="uid://dy4l18oox485h" path="res://Assets/sprites/drops/materials/exxollium.png" id="2_csuqe"]
+
+[resource]
+script = ExtResource("1_m6erx")
+name = "exxollium"
+schema = 0
+id = 4
+count = 0
+star = 0
+sell = 1
+texture = ExtResource("2_csuqe")
+description = "An unstable mineral that's hot to the touch."
+metadata/_custom_type_script = "uid://p3hg1j7q2f4o"

@@ -20,7 +20,8 @@ Global="*res://Scripts/global.gd"
 
 [editor]
 
-movie_writer/movie_file="C:/Users/srx20/Documents/games/circulardefenders/Demo/demo.avi"
+movie_writer/movie_file="C:/Users/srx20/Documents/games/CD.avi"
+movie_writer/disable_vsync=true
 
 [global_group]
 

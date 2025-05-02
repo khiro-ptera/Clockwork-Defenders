@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://bq7jvo78xaw5x"]
+
+[ext_resource type="Script" uid="uid://p3hg1j7q2f4o" path="res://Scripts/Inventory/inventory_item.gd" id="1_voy7b"]
+[ext_resource type="Texture2D" uid="uid://cc7yt1apkcgnl" path="res://Assets/sprites/drops/materials/voidfragment.png" id="2_rhcld"]
+
+[resource]
+script = ExtResource("1_voy7b")
+name = "voidfragment"
+schema = 0
+id = 7
+count = 0
+star = 0
+sell = 5
+texture = ExtResource("2_rhcld")
+description = "It emits an ominous dull hum. Can be used in place of any 0 star material."
+metadata/_custom_type_script = "uid://p3hg1j7q2f4o"

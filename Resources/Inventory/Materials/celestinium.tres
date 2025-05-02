@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://ddpagf5tgbplw"]
+
+[ext_resource type="Script" uid="uid://p3hg1j7q2f4o" path="res://Scripts/Inventory/inventory_item.gd" id="1_tltbs"]
+[ext_resource type="Texture2D" uid="uid://2ed11kag70bq" path="res://Assets/sprites/drops/materials/celestinium.png" id="2_o4e50"]
+
+[resource]
+script = ExtResource("1_tltbs")
+name = "celestinium"
+schema = 0
+id = 2
+count = 0
+star = 0
+sell = 1
+texture = ExtResource("2_o4e50")
+description = "A chalky material that's light as a feather."
+metadata/_custom_type_script = "uid://p3hg1j7q2f4o"

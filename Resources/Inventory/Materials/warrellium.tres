@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://214eacysi2ay"]
+
+[ext_resource type="Script" uid="uid://p3hg1j7q2f4o" path="res://Scripts/Inventory/inventory_item.gd" id="1_hph5n"]
+[ext_resource type="Texture2D" uid="uid://bc0jiqodikos1" path="res://Assets/sprites/drops/materials/warrellium.png" id="2_se6y8"]
+
+[resource]
+script = ExtResource("1_hph5n")
+name = "warrellium"
+schema = 0
+id = 6
+count = 0
+star = 0
+sell = 1
+texture = ExtResource("2_se6y8")
+description = "An extremely dense and heavy crystal. It has an extremely high melting point."
+metadata/_custom_type_script = "uid://p3hg1j7q2f4o"

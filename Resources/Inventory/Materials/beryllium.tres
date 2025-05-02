@@ -6,8 +6,11 @@
 [resource]
 script = ExtResource("1_ex5ap")
 name = "beryllium"
+schema = 0
 id = 1
+count = 0
 star = 0
 sell = 1
 texture = ExtResource("2_jcupt")
+description = "An unstable crystal that occassionally vibrates erratically."
 metadata/_custom_type_script = "uid://p3hg1j7q2f4o"

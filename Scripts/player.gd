@@ -257,7 +257,9 @@ func collect(item, quantity, star = 0, recipeno = 0):
 	if item == "medallion":
 		medallions += quantity
 	elif recipeno != 0:
-		var invitem = InvItem.new(item, star, recipeno)
+		var invitem = InvItem.new()
+		invitem.generate(item, star, recipeno)
+		# var invitem = load("res://Resources/Inventory/Materials/" + item + ".tres")
 		inv.items.append(invitem)
 		get_parent().ui.get_child(0).update(invitem)
 	else:
@@ -265,14 +267,16 @@ func collect(item, quantity, star = 0, recipeno = 0):
 		for i in inv.items:
 			if i != null:
 				if i.name == item:
-					var invitem = InvItem.new(item, star)
+					# var invitem = InvItem.new(item, star)
+					var invitem = load("res://Resources/Inventory/Materials/" + item + ".tres")
 					inv.items.append(invitem)
 					i.count += quantity
 					get_parent().ui.get_child(0).increase(item, quantity)
 					hasItem = true
 					break
 		if !hasItem:
-			var invitem = InvItem.new(item, star)
+			# var invitem = InvItem.new(item, star)
+			var invitem = load("res://Resources/Inventory/Materials/" + item + ".tres")
 			inv.items.append(invitem)
 			get_parent().ui.get_child(0).update(invitem)
 		print(inv.items)

@@ -65,9 +65,9 @@ func update(item: InvItem):
 	# print(item.name)
 	if item.schema != 0:
 		var wname = Global.wdict.find_key(item.schema)
-		tempi.setItem(item.texture, wname + " schema", 1, 1)
+		tempi.setItem(item, wname + " schema", 1, 1)
 	else:
-		tempi.setItem(item.texture, item.name)
+		tempi.setItem(item, item.name)
 	items.add_child(tempi)
 
 func increase(item: String, c = 1):
@@ -78,20 +78,16 @@ func increase(item: String, c = 1):
 
 func _on_b_1_pressed() -> void:
 	player.active = 0
-	print("hi")
 	player.swapWeapon()
 
 func _on_b_2_pressed() -> void:
 	player.active = 1
-	print("hi")
 	player.swapWeapon()
 
 func _on_b_3_pressed() -> void:
 	player.active = 2
-	print("hi")
 	player.swapWeapon()
 
 func _on_b_4_pressed() -> void:
 	player.active = 3
-	print("hi")
 	player.swapWeapon()

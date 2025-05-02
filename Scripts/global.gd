@@ -48,7 +48,8 @@ var wdict = {
 var knownSchema: Array[int] = []
 
 func t1_drop(pos, scene):
-	var roll = randf_range(0.0, 1.0)
+	
+	var roll = randf_range(0.0, 1.0) # schema
 	if roll < 0.05:
 		var mtemp = materialSC.instantiate()
 		mtemp.item = "schema1"
@@ -64,4 +65,12 @@ func t1_drop(pos, scene):
 		mtemp.star = 2
 		mtemp.pos = pos + Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
 		scene.call_deferred("add_child", mtemp)
+		mtemp = null
+
+	roll = randf_range(0.0, 1.0)
+	if roll < 0.02:
+		var mtemp = materialSC.instantiate()
+		mtemp.item = "voidfragment"
+		mtemp.pos = pos + Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
+		get_parent().call_deferred("add_child", mtemp)
 		mtemp = null

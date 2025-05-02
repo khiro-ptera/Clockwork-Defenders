@@ -10,7 +10,9 @@ class_name InvItem
 @export var sell: int
 @export var texture: Texture2D
 
-func _init(n, st, s = 0) -> void:
+@export var description: String = ""
+
+func generate(n, st, s = 0) -> void:
 	name = n
 	count = 1
 	star = st
