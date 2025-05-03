@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbo8vu1mf0ll2"]
+
+[ext_resource type="Script" uid="uid://dg00yhhadllyb" path="res://Scripts/elevator.gd" id="1_1mawn"]
+[ext_resource type="Texture2D" uid="uid://u6e46xxn44bn" path="res://Assets/sprites/terrain/elevator.png" id="2_3veos"]
+[ext_resource type="Texture2D" uid="uid://cjsehhgpgwe35" path="res://Assets/sprites/UI/schemaback.png" id="3_3veos"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_408l3"]
+size = Vector2(128, 128)
+
+[sub_resource type="LabelSettings" id="LabelSettings_408l3"]
+
+[node name="Elevator" type="Node2D"]
+script = ExtResource("1_1mawn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_408l3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_3veos")
+
+[node name="Delve" type="TextureButton" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -96.0
+offset_right = 64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("3_3veos")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Delve"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Delve?"
+label_settings = SubResource("LabelSettings_408l3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="pressed" from="Delve" to="." method="_on_delve_pressed"]

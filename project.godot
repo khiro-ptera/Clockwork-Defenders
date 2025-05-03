@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="ClockworkDefenders"
+run/main_scene="uid://dneyet5ba3iwm"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://c0hi7qb6fkgxa"
 

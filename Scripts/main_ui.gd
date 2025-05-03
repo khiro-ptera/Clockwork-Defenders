@@ -41,6 +41,7 @@ func _process(delta: float) -> void:
 		dashbar.value = 100 * player.dashTimer.get_time_left()/player.dashCD
 	
 	if Input.is_action_just_pressed("Inventory"):
+		print("inv open")
 		if invOpen:
 			invOpen = false
 		else:
